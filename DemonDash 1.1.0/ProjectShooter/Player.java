@@ -1,126 +1,123 @@
-import greenfoot.*;  
-public class Player extends Actor
-{   //Instance variables/Constructors
-    private int gravity;
-    private int jumpStrength;
-    private int verticalVelocity;
-    
-    private boolean shooting = false;
-    private int shootingDelay = 10; // Adjust the delay as needed
-    private int shootingTimer = 0;
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-    public Player() 
+/**
+ * Write a description of class Player here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class Player extends SimulationActor
+{
+    public int jumpCount = 0;
+    public int maxJumpCount = 2;
+    public int jumpHeight = 5;
+    public int playerSpeed = 5;
+    public boolean jumpPressed  = false;
+    public Player()
     {
-        gravity = 1; // Adjust gravity strength as needed
-        jumpStrength = 15; // Adjust jump strength as needed
-        verticalVelocity = 0;
+        super(); 
+        this.acceleration = new Vector2D(0.0,-10.0);
     }
-
+    /**
+     * Act - do whatever the Player wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
     public void act()
-    { 
-        Movement();
-        applyGravity();
-        checkForGround();
-        Jumping();
-        checkForShooting();
+    {
+        super.act();
+        
+        checkCollision();
+        processInput();
+        
+        // Add your action code here.
     }
-    //Methods
-    private void Movement() 
+    public void processInput()
     {
-        if(Greenfoot.isKeyDown("right") || Greenfoot.isKeyDown("d")) 
-        {
-            move(3);
-        }
-        if(Greenfoot.isKeyDown("left") || Greenfoot.isKeyDown("a")) 
-        {
-            move(-3);
-        }
-    }
-    
-    private void applyGravity() 
-    {
-        setLocation(getX(), getY() + verticalVelocity);
-        verticalVelocity += gravity;
-    }
-    
-    private void Jumping() 
-    {
-        if(Greenfoot.isKeyDown("space") || Greenfoot.isKeyDown("up") || Greenfoot.isKeyDown("w")) 
-        {
-            //System.out.println("Jumping key pressed"); //debugging
-            jump();
-        }
-    }
-    private boolean onGround() 
-    {
-        int groundHeight = getWorld().getHeight() - getImage().getHeight() / 2;
-        return getY() >= groundHeight;
-    }
-    
-    private void jump() 
-    {
-        if(onGround()) 
-        {
-            //System.out.println("Jumping"); //debugging
-            verticalVelocity = -jumpStrength;
-        }
-    }
-    
-    private void checkForGround() 
-    {
-        if(getY() >= getWorld().getHeight() - getImage().getHeight() / 2) 
-        {
-            setLocation(getX(), getWorld().getHeight() - getImage().getHeight() / 2);
-            verticalVelocity = 0;
-        }
-    }  
-         
-    private void checkForShooting() 
-    {
-      if (Greenfoot.mousePressed(null)) 
-      {
-        shooting = true;
-      } 
-      else if (Greenfoot.mouseClicked(null)) 
-      {
-        shooting = false;
-        shootGun();
-      }
+       // Process move input 
+       if (Greenfoot.isKeyDown("right")) 
+       { 
+            this.velocity = new Vector2D(playerSpeed, this.velocity.getY());   
+       }
+       
+       else if (Greenfoot.isKeyDown("left")) 
+       { 
+            this.velocity = new Vector2D(-playerSpeed, this.velocity.getY());      
+       }
+       else if (!Greenfoot.isKeyDown("right") && !Greenfoot.isKeyDown("left"))
+       {
+           this.velocity = new Vector2D(0, this.velocity.getY());  
+       }
+       
+       if (Greenfoot.isKeyDown("space") && !jumpPressed && jumpCount < maxJumpCount) 
+       { 
+            this.velocity = new Vector2D(this.velocity.getX(), jumpHeight);   
+            jumpPressed = true;
+       }
+       
+       if (jumpPressed && !Greenfoot.isKeyDown("space")) 
+       { 
+            ++jumpCount;
+            jumpPressed = false;
+            this.velocity = new Vector2D(this.velocity.getX(), this.velocity.getY() );      
+       }
 
-      if (shooting) 
-      {
-          if (shootingTimer <= 0) 
-          {
-            shootGun();
-            shootingTimer = shootingDelay;
-          } 
-          else 
-          {
-            shootingTimer--;
-          }
-      } 
-      else 
-      {
-          shootingTimer = shootingDelay; // Reset the shooting timer when not shooting
-      }  
+
     }
-    
-    public void shootGun() 
+    private void checkPlatformCollision() {
+    Platform platform = (Platform)getOneIntersectingObject(Platform.class);
+    if (platform != null) {
+        int playerBottom = getY() + getImage().getHeight() / 2;
+        int playerTop = getY() - getImage().getHeight() / 2;
+        int platformTop = platform.getY() - platform.getImage().getHeight() / 2;
+        int platformLeft = platform.getX() - platform.getImage().getWidth() / 2 + platform.offset;
+        int platformRight = platform.getX() + platform.getImage().getWidth() / 2;
+        int platformBottom = platform.getY() + platform.getImage().getHeight(); 
+        
+        // We check if the feet of the player are in or connected to the platform
+        // So that he can go throug it from the bottom but wont pass through it from the top
+        if (playerBottom >= platformTop && playerBottom <= platformBottom) {
+            setLocation(getX(), platformTop - getImage().getHeight() / 2);
+            // He is on the ground the velocity in Y is 0;
+            this.velocity = new Vector2D(this.velocity.getX(), 0.0);
+            // We reset the player jump count
+            jumpCount = 0;
+        }
+       
+    }
+    }
+    public void checkCollision()
     {
         World world = getWorld();
-        bullet bullet = new bullet();
-        world.addObject(bullet, getX() , getY() ); 
-    } 
-    
-    /*
-    public void platformIntersect()
-    {
-       if (
+        
+        int worldWidth = world.getWidth();
+        int worldHeight = world.getHeight();
+        int imageWidth = getImage().getWidth();
+        int imageHeight = getImage().getHeight();
+        // check Collision with platform 
+        checkPlatformCollision();
+        
+        // Check collision with lower edge of world
+        if (getY() + imageHeight / 2 >= worldHeight) 
+        {
+            setLocation(getX(), worldHeight - imageHeight / 2);
+            this.velocity = new Vector2D(this.velocity.getX(), 0.0);
+            jumpCount = 0; // Reset jump count when hitting the bottom edge
+        }
+         // Left edge collision
+        if (getX() - imageWidth / 2 <= 0) 
+        {
+            setLocation(imageWidth / 2, getY());
+            this.velocity = new Vector2D(0.0, this.velocity.getY());
+        }
+        
+        // Right edge collision
+        if (getX() + imageWidth / 2 >= worldWidth) {
+            setLocation(worldWidth - imageWidth / 2, getY());
+            this.velocity = new Vector2D(0.0, this.velocity.getY());
+            
+            Greenfoot.setWorld(new mainWorld());
+            
+        }
     }
-    */
     
-    
-    
-    
- }
-
+}

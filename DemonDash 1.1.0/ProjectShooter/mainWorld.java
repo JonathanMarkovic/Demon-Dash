@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class mainWorld extends Scroll
+public class mainWorld extends SimulationWorld
 {
 
     /**
@@ -16,17 +16,19 @@ public class mainWorld extends Scroll
     public mainWorld()
         {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(1100, 700, 1); 
+          super("", 800, 600, new Point2D(0.0, 0.0), 20);
         prepare();
     }
+    
     /**
      * Prepare the world for the start of the program.
      * That is: create the initial objects and add them to the world.
      */
     private void prepare()
     {
-        Player player = new Player();
-        addObject(player,136,655);
+
+        PlayerShooter playerShooter2 = new PlayerShooter();
+        addObject(playerShooter2,109,549);
     }
 }
 
