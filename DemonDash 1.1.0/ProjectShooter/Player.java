@@ -34,12 +34,12 @@ public class Player extends SimulationActor
     public void processInput()
     {
        // Process move input 
-       if (Greenfoot.isKeyDown("right")) 
+       if (Greenfoot.isKeyDown("right") || Greenfoot.isKeyDown("D")) 
        { 
             this.velocity = new Vector2D(playerSpeed, this.velocity.getY());   
        }
        
-       else if (Greenfoot.isKeyDown("left")) 
+       else if (Greenfoot.isKeyDown("left") || Greenfoot.isKeyDown("A")) 
        { 
             this.velocity = new Vector2D(-playerSpeed, this.velocity.getY());      
        }

@@ -8,6 +8,8 @@ public class PlayerShooter extends Player
     private boolean shooting = false;
     private int shootingDelay = 10; // Adjust the delay as needed
     private int shootingTimer = 0;
+    
+    public Gun gun;
 
     public PlayerShooter() 
     {
@@ -16,6 +18,16 @@ public class PlayerShooter extends Player
         verticalVelocity = 0;
     }
 
+    public void equipGun() {
+        gun = new Gun();
+        gun.owner = this;
+        World world = getWorld();
+        
+        if(world != null) {
+            world.addObject(gun, this.getX() + 5, this.getY());
+        }
+    }
+    
     public void act()
     { 
         super.act();
@@ -24,6 +36,9 @@ public class PlayerShooter extends Player
         //checkForGround();
         //Jumping();
         checkForShooting();
+        /*if (gun == null) {
+            equipGun();
+        }*/
     }
     //Methods
     private void Movement() 
@@ -110,7 +125,7 @@ public class PlayerShooter extends Player
     public void shootGun() 
     {
         World world = getWorld();
-        bullet bullet = new bullet();
+        Bullet bullet = new Bullet();
         world.addObject(bullet, getX() , getY() ); 
     } 
     
