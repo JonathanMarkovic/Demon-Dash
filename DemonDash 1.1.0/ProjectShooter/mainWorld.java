@@ -27,8 +27,8 @@ public class mainWorld extends SimulationWorld
     private void prepare()
     {
 
-        PlayerShooter playerShooter2 = new PlayerShooter();
-        addObject(playerShooter2,109,549);
+        PlayerShooter playerShooter = new PlayerShooter();
+        addObject(playerShooter,69,568);
     }
 }
 

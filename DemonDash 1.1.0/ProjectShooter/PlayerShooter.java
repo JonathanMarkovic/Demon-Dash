@@ -36,9 +36,9 @@ public class PlayerShooter extends Player
         //checkForGround();
         //Jumping();
         checkForShooting();
-        /*if (gun == null) {
+        if (gun == null) {
             equipGun();
-        }*/
+        }
     }
     //Methods
     private void Movement() 

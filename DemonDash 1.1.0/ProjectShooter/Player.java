@@ -13,6 +13,7 @@ public class Player extends SimulationActor
     public int jumpHeight = 5;
     public int playerSpeed = 5;
     public boolean jumpPressed  = false;
+    
     public Player()
     {
         super(); 
@@ -31,6 +32,7 @@ public class Player extends SimulationActor
         
         // Add your action code here.
     }
+    
     public void processInput()
     {
        // Process move input 
@@ -63,28 +65,30 @@ public class Player extends SimulationActor
 
 
     }
+    
     private void checkPlatformCollision() {
-    Platform platform = (Platform)getOneIntersectingObject(Platform.class);
-    if (platform != null) {
-        int playerBottom = getY() + getImage().getHeight() / 2;
-        int playerTop = getY() - getImage().getHeight() / 2;
-        int platformTop = platform.getY() - platform.getImage().getHeight() / 2;
-        int platformLeft = platform.getX() - platform.getImage().getWidth() / 2 + platform.offset;
-        int platformRight = platform.getX() + platform.getImage().getWidth() / 2;
-        int platformBottom = platform.getY() + platform.getImage().getHeight(); 
-        
-        // We check if the feet of the player are in or connected to the platform
-        // So that he can go throug it from the bottom but wont pass through it from the top
-        if (playerBottom >= platformTop && playerBottom <= platformBottom) {
-            setLocation(getX(), platformTop - getImage().getHeight() / 2);
-            // He is on the ground the velocity in Y is 0;
-            this.velocity = new Vector2D(this.velocity.getX(), 0.0);
-            // We reset the player jump count
-            jumpCount = 0;
-        }
+        Platform platform = (Platform)getOneIntersectingObject(Platform.class);
+        if (platform != null) {
+            int playerBottom = getY() + getImage().getHeight() / 2;
+            int playerTop = getY() - getImage().getHeight() / 2;
+            int platformTop = platform.getY() - platform.getImage().getHeight() / 2;
+            int platformLeft = platform.getX() - platform.getImage().getWidth() / 2 + platform.offset;
+            int platformRight = platform.getX() + platform.getImage().getWidth() / 2;
+            int platformBottom = platform.getY() + platform.getImage().getHeight(); 
+            
+            // We check if the feet of the player are in or connected to the platform
+            // So that he can go throug it from the bottom but wont pass through it from the top
+            if (playerBottom >= platformTop && playerBottom <= platformBottom) {
+                setLocation(getX(), platformTop - getImage().getHeight() / 2);
+                // He is on the ground the velocity in Y is 0;
+                this.velocity = new Vector2D(this.velocity.getX(), 0.0);
+                // We reset the player jump count
+                jumpCount = 0;
+            }
        
+        }
     }
-    }
+    
     public void checkCollision()
     {
         World world = getWorld();
