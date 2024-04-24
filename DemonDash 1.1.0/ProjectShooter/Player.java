@@ -119,7 +119,7 @@ public class Player extends SimulationActor
             setLocation(worldWidth - imageWidth / 2, getY());
             this.velocity = new Vector2D(0.0, this.velocity.getY());
             
-            Greenfoot.setWorld(new mainWorld());
+            Greenfoot.setWorld(new MainWorld());
             
         }
     }
