@@ -4,6 +4,8 @@ comment0.text=\r\n\ Write\ a\ description\ of\ class\ bullet\ here.\r\n\ \r\n\ @
 comment1.params=
 comment1.target=void\ act()
 comment2.params=
-comment2.target=void\ ifAtWorldEdge()
-comment2.text=\r\n\ \ \ \ public\ int\ findAngle()\ //Angle\ of\ the\ cursor\ so\ player\ shoots\ towards\ cursor\r\n\ \ \ \ {\r\n\ \ \ \ \ \ \ \ int\ mouseX\ \=\ mouse.getX();\r\n\ \ \ \ \ \ \ \ int\ mouseY\ \=\ mouse.getY();\r\n\ \ \ \ \ \ \ \ double\ deltaX\ \=\ (mouseX\ \ -\ this.getX());\ \ \ \ //Change\ in\ X\ \ \ \ \ \ \ \ (To\ calc\ the\ current\ coordinate\ of\ the\ mouse\ position\ &\ the\ coordinate\ of\ the\ object)\ \r\n\ \ \ \ \ \ \ \ double\ deltaY\ \=\ (mouseY\ -\ this.getY());\ \ \ \ \ //Change\ in\ Y\r\n\ \ \ \ \ \ \ \ double\ angle\ \=\ Math.atan2(deltaY,\ deltaX);\ \ \ \ //Finds\ angle\ with\ deltaX\ and\ deltaY\r\n\ \ \ \ \ \ \ \ angle\ \=\ Math.toDegrees(angle);\r\n\ \ \ \ \ \ \ \ int\ angle_return\ \=\ (int)(angle);\r\n\ \ \ \ \ \ \ \ return\ angle_return;\r\n\ \ \ \ }\r\n
-numComments=3
+comment2.target=void\ shoot()
+comment3.params=
+comment3.target=void\ ifAtWorldEdge()
+comment3.text=\r\n\ \ \ \ public\ int\ findAngle()\ //Angle\ of\ the\ cursor\ so\ player\ shoots\ towards\ cursor\r\n\ \ \ \ {\r\n\ \ \ \ \ \ \ \ int\ mouseX\ \=\ mouse.getX();\r\n\ \ \ \ \ \ \ \ int\ mouseY\ \=\ mouse.getY();\r\n\ \ \ \ \ \ \ \ double\ deltaX\ \=\ (mouseX\ \ -\ this.getX());\ \ \ \ //Change\ in\ X\ \ \ \ \ \ \ \ (To\ calc\ the\ current\ coordinate\ of\ the\ mouse\ position\ &\ the\ coordinate\ of\ the\ object)\ \r\n\ \ \ \ \ \ \ \ double\ deltaY\ \=\ (mouseY\ -\ this.getY());\ \ \ \ \ //Change\ in\ Y\r\n\ \ \ \ \ \ \ \ double\ angle\ \=\ Math.atan2(deltaY,\ deltaX);\ \ \ \ //Finds\ angle\ with\ deltaX\ and\ deltaY\r\n\ \ \ \ \ \ \ \ angle\ \=\ Math.toDegrees(angle);\r\n\ \ \ \ \ \ \ \ int\ angle_return\ \=\ (int)(angle);\r\n\ \ \ \ \ \ \ \ return\ angle_return;\r\n\ \ \ \ }\r\n
+numComments=4

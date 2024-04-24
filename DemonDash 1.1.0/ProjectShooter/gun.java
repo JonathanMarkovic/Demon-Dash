@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Gun extends Actor
 {
-    private int gunOffset = 20;
+    public int gunOffset = 20;
     public Actor owner;
     public MouseInfo mouse = Greenfoot.getMouseInfo();
     
@@ -23,11 +23,11 @@ public class Gun extends Actor
     
     public void aimGun() {
         int rotation = findAngle();
-                
+        
         setRotation(rotation); //set the rotation of the gun
         
-        int x = owner.getX() + (int) (gunOffset * Math.cos(Math.toRadians(rotation))); // Set the sword location
-        int y = owner.getY() + (int) (gunOffset * Math.sin(Math.toRadians(rotation))); // Set the sword location
+        int x = owner.getX() + (int) (gunOffset * Math.cos(Math.toRadians(rotation))); // Set the gun location
+        int y = owner.getY() + (int) (gunOffset * Math.sin(Math.toRadians(rotation))); // Set the gun location
         
         setLocation(x,y);
     }

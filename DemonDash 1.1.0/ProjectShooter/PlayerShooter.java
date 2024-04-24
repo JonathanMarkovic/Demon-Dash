@@ -18,16 +18,6 @@ public class PlayerShooter extends Player
         verticalVelocity = 0;
     }
 
-    public void equipGun() {
-        gun = new Gun();
-        gun.owner = this;
-        World world = getWorld();
-        
-        if(world != null) {
-            world.addObject(gun, this.getX() + 5, this.getY());
-        }
-    }
-    
     public void act()
     { 
         super.act();
@@ -41,6 +31,16 @@ public class PlayerShooter extends Player
         }
     }
     //Methods
+    public void equipGun() {
+        gun = new Gun();
+        gun.owner = this;
+        World world = getWorld();
+        
+        if(world != null) {
+            world.addObject(gun, this.getX() + 5, this.getY());
+        }
+    }
+    
     private void Movement() 
     {
         if(Greenfoot.isKeyDown("right") || Greenfoot.isKeyDown("d")) 
