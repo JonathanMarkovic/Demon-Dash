@@ -1,4 +1,7 @@
 #Greenfoot project file
+class.Bullet.image=bulletpx.png
+class.Gun.image=handgun.png
+class.Platform.image=basicPlatform.png
 class.PlayerShooter.image=man01.png
 dependency1.from=SimulationWorld
 dependency1.to=Point2D
@@ -172,7 +175,8 @@ target9.type=ClassTarget
 target9.width=120
 target9.x=0
 target9.y=0
-version=3.0.0
+version=3.1.0
 width=1936
+world.lastInstantiated=MainWorld
 xPosition=0
 yPosition=0
