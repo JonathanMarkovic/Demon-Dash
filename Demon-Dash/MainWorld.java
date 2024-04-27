@@ -28,6 +28,16 @@ public class MainWorld extends SimulationWorld
     {
         PlayerShooter playerShooter = new PlayerShooter();
         addObject(playerShooter,17,571);
+        Platform platform = new Platform();
+        addObject(platform,228,505);
+        Platform platform2 = new Platform();
+        addObject(platform2,475,395);
+        Platform platform3 = new Platform();
+        addObject(platform3,393,465);
+        Platform platform4 = new Platform();
+        addObject(platform4,634,506);
+        Platform platform5 = new Platform();
+        addObject(platform5,207,333);
     }
 }
 
