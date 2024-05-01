@@ -38,6 +38,8 @@ public class MainWorld extends SimulationWorld
         addObject(platform4,634,506);
         Platform platform5 = new Platform();
         addObject(platform5,207,333);
+        Gun gun = new Gun();
+        addObject(gun,331,561);
     }
 }
 

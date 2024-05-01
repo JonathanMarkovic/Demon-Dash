@@ -25,17 +25,20 @@ public class PlayerShooter extends Player
         //applyGravity();
         //checkForGround();
         //Jumping();
-        checkForShooting();
-        if (gun == null) {
+        //checkForShooting();
+        if (this.isTouching(Gun.class)) {
+            removeTouching(Gun.class);
             equipGun();
         }
     }
     //Methods
     public void equipGun() {
-        gun = new Gun();
+        if (gun == null) {
+            gun = new Gun();
+            //gun.owner = this;
+        }
         gun.owner = this;
         World world = getWorld();
-        
         if(world != null) {
             world.addObject(gun, this.getX() + 5, this.getY());
         }
@@ -91,7 +94,8 @@ public class PlayerShooter extends Player
             verticalVelocity = 0;
         }
     }  
-         
+    
+    /*
     private void checkForShooting() 
     {
       if (Greenfoot.mousePressed(null)) 
@@ -128,14 +132,7 @@ public class PlayerShooter extends Player
         Bullet bullet = new Bullet();
         world.addObject(bullet, getX() , getY() ); 
     } 
-    
-    /*
-    public void platformIntersect()
-    {
-       if (
-    }
     */
-    
     
     
     

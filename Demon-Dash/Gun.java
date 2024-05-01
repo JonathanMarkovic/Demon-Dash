@@ -12,13 +12,19 @@ public class Gun extends Actor
     public Actor owner;
     public MouseInfo mouse = Greenfoot.getMouseInfo();
     
+    private boolean shooting = false;
+    private int shootingDelay = 10; // Adjust the delay as needed
+    private int shootingTimer = 0;
     /**
      * Act - do whatever the gun wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()
     {
-        aimGun(); //To shoot bullet towards cursor (uses the findAngle to find cursor location n shoot n stuff)
+        if (owner != null) {
+            aimGun(); //To shoot bullet towards cursor (uses the findAngle to find cursor location n shoot n stuff)
+            checkForShooting();
+        }
     }
     
     public void aimGun() {
@@ -47,5 +53,44 @@ public class Gun extends Actor
         angle = Math.toDegrees(angle);
         int angle_return = (int)(angle);
         return angle_return;
-    }    
+    }
+    
+    private void checkForShooting() 
+    {
+      if (Greenfoot.mousePressed(null)) 
+      {
+        shooting = true;
+      } 
+      else if (Greenfoot.mouseClicked(null)) 
+      {
+        shooting = false;
+        shootGun();
+      }
+
+      if (shooting) 
+      {
+          if (shootingTimer <= 0) 
+          {
+            shootGun();
+            shootingTimer = shootingDelay;
+          } 
+          else 
+          {
+            shootingTimer--;
+          }
+      } 
+      else 
+      {
+          shootingTimer = shootingDelay; // Reset the shooting timer when not shooting
+      }  
+    }
+    
+    public void shootGun() 
+    {
+        World world = getWorld();
+        Bullet bullet = new Bullet();
+        world.addObject(bullet, getX() , getY() ); 
+    } 
+    
+    
 }
