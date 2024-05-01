@@ -40,6 +40,9 @@ public class MainWorld extends SimulationWorld
         addObject(platform5,207,333);
         Gun gun = new Gun();
         addObject(gun,331,561);
+        gun.setLocation(122,568);
+        Enemy enemy = new Enemy();
+        addObject(enemy,638,473);
     }
 }
 
