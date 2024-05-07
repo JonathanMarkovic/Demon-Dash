@@ -13,7 +13,7 @@ public class Gun extends Actor
     public MouseInfo mouse = Greenfoot.getMouseInfo();
     
     private boolean shooting = false;
-    private int shootingDelay = 10; // Adjust the delay as needed
+    private int shootingDelay = 75; // Adjust the delay as needed
     private int shootingTimer = 0;
     /**
      * Act - do whatever the gun wants to do. This method is called whenever
@@ -90,6 +90,7 @@ public class Gun extends Actor
         World world = getWorld();
         Bullet bullet = new Bullet();
         world.addObject(bullet, getX() , getY() ); 
+        Greenfoot.playSound("bullet shot fx.wav");
     } 
     
     
