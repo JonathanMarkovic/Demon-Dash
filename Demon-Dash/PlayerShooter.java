@@ -30,6 +30,14 @@ public class PlayerShooter extends Player
             removeTouching(Gun.class);
             equipGun();
         }
+        if (this.isTouching(Medkit.class)) {
+            removeTouching(Medkit.class);
+            //pickupMedkit();
+        }
+        if (this.isTouching(AmmoBox.class)) {
+            removeTouching(AmmoBox.class);
+            //pickupAmmoBox();
+        }
     }
     //Methods
     public void equipGun() {
@@ -43,7 +51,9 @@ public class PlayerShooter extends Player
             world.addObject(gun, this.getX() + 5, this.getY());
         }
     }
-    
+    /*public void pickupMedkit() {
+        if (
+    }*/
     private void Movement() 
     {
         if(Greenfoot.isKeyDown("right") || Greenfoot.isKeyDown("d")) 

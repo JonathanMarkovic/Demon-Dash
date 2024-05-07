@@ -8,6 +8,7 @@ comment3.params=
 comment3.target=void\ equipGun()
 comment4.params=
 comment4.target=void\ Movement()
+comment4.text=public\ void\ pickupMedkit()\ {\r\n\ \ \ \ \ \ \ \ if\ (\r\n}
 comment5.params=
 comment5.target=void\ applyGravity()
 comment6.params=

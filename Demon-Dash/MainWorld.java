@@ -43,6 +43,10 @@ public class MainWorld extends SimulationWorld
         gun.setLocation(122,568);
         Enemy enemy = new Enemy();
         addObject(enemy,638,473);
+        Medkit medkit = new Medkit();
+        addObject(medkit,393,441);
+        AmmoBox ammoBox = new AmmoBox();
+        addObject(ammoBox,228,476);
     }
 }
 
