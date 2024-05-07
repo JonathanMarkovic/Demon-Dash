@@ -8,7 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class MainWorld extends SimulationWorld
 {
-
+    public int score = 0;
+    private PlayerShooter playerShooter;
     /**
      * Constructor for objects of class MainWorld.
      * 
@@ -18,7 +19,15 @@ public class MainWorld extends SimulationWorld
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super("", 800, 600, new Point2D(0.0, 0.0), 20);
         Greenfoot.playSound("demo Hellfire.wav");
+        showText("Score: " + score, getWidth() / 2, 15);
         prepare();
+    }
+    
+    public MainWorld(Player player) {
+        super("", 800, 600, new Point2D(0.0, 0.0), 20);
+        showText("Score: " + score, getWidth() / 2, 15);
+        Greenfoot.playSound("demo Hellfire.wav");
+        prepare2();
     }
     
     /**
@@ -27,7 +36,7 @@ public class MainWorld extends SimulationWorld
      */
     private void prepare()
     {
-        PlayerShooter playerShooter = new PlayerShooter();
+        playerShooter = new PlayerShooter();
         addObject(playerShooter,17,571);
         Platform platform = new Platform();
         addObject(platform,228,505);
@@ -48,6 +57,19 @@ public class MainWorld extends SimulationWorld
         addObject(medkit,393,441);
         AmmoBox ammoBox = new AmmoBox();
         addObject(ammoBox,228,476);
+    }
+    
+    private void prepare2() {
+        addObject(playerShooter, 17, 571);
+        int platforms = Greenfoot.getRandomNumber(10);
+        
+        for (int i = 0; i < platforms; i++) {
+            addObject(new Platform(), Greenfoot.getRandomNumber(getWidth()), Greenfoot.getRandomNumber(getHeight()));
+        }
+        
+        if (Greenfoot.getRandomNumber(10) < 3) {
+            addObject(new Enemy(), Greenfoot.getRandomNumber(getWidth()) + 100, Greenfoot.getRandomNumber(getHeight()));
+        }
     }
 }
 

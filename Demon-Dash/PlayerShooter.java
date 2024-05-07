@@ -6,8 +6,9 @@ public class PlayerShooter extends Player
     private int verticalVelocity;
     
     private boolean shooting = false;
-    private int shootingDelay = 10; // Adjust the delay as needed
+    private int shootingDelay = 75; // Adjust the delay as needed
     private int shootingTimer = 0;
+    private int health = 3;
     
     public Gun gun;
 
@@ -26,6 +27,7 @@ public class PlayerShooter extends Player
         //checkForGround();
         //Jumping();
         //checkForShooting();
+        takeDamage();
         if (this.isTouching(Gun.class)) {
             removeTouching(Gun.class);
             equipGun();
@@ -51,6 +53,18 @@ public class PlayerShooter extends Player
             world.addObject(gun, this.getX() + 5, this.getY());
         }
     }
+    
+    public void takeDamage() {
+        if (this.isTouching(Enemy.class)) {
+            health--;
+            
+            if (health == 0) {
+                World world = new GameOverWorld();
+                Greenfoot.setWorld(world);
+            }
+        }
+    }
+    
     /*public void pickupMedkit() {
         if (
     }*/
