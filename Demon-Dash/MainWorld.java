@@ -59,6 +59,8 @@ public class MainWorld extends SimulationWorld
         addObject(medkit,393,441);
         AmmoBox ammoBox = new AmmoBox();
         addObject(ammoBox,228,476);
+        AmmoCounter ammoCounter = new AmmoCounter();
+        addObject(ammoCounter,23,21);
     }
     
     private void prepare2() {

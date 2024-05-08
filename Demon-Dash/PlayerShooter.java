@@ -22,17 +22,12 @@ public class PlayerShooter extends Player
     public void act()
     { 
         super.act();
-        //Movement();
-        //applyGravity();
-        //checkForGround();
-        //Jumping();
-        //checkForShooting();
         takeDamage();
         if (this.isTouching(Gun.class)) {
             removeTouching(Gun.class);
             equipGun();
         }
-        if (this.isTouching(Medkit.class)) {
+        if (this.isTouching(Medkit.class)&&(health != 3)){
             removeTouching(Medkit.class);
             //pickupMedkit();
         }
@@ -79,7 +74,13 @@ public class PlayerShooter extends Player
             move(-3);
         }
     }
-    
+    private void Dashing() {
+        if(Greenfoot.isKeyDown("Shift"))
+        {
+            //canTakeDamage = false;
+            
+        }
+    }
     private void applyGravity() 
     {
         setLocation(getX(), getY() + verticalVelocity);
@@ -126,46 +127,7 @@ public class PlayerShooter extends Player
             SimulationWorld world = (SimulationWorld) getWorld();
             world.transitionToWorld(new MainWorld(this));
     }
-    
-    /*
-    private void checkForShooting() 
-    {
-      if (Greenfoot.mousePressed(null)) 
-      {
-        shooting = true;
-      } 
-      else if (Greenfoot.mouseClicked(null)) 
-      {
-        shooting = false;
-        shootGun();
-      }
-
-      if (shooting) 
-      {
-          if (shootingTimer <= 0) 
-          {
-            shootGun();
-            shootingTimer = shootingDelay;
-          } 
-          else 
-          {
-            shootingTimer--;
-          }
-      } 
-      else 
-      {
-          shootingTimer = shootingDelay; // Reset the shooting timer when not shooting
-      }  
-    }
-    
-    public void shootGun() 
-    {
-        World world = getWorld();
-        Bullet bullet = new Bullet();
-        world.addObject(bullet, getX() , getY() ); 
-    } 
-    */
-    
+   
     
     
  }
