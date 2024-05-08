@@ -116,12 +116,12 @@ public class Player extends SimulationActor
         
         // Right edge collision
         if (getX() + imageWidth / 2 >= worldWidth) {
-            setLocation(worldWidth - imageWidth / 2, getY());
-            this.velocity = new Vector2D(0.0, this.velocity.getY());
-            
-            Greenfoot.setWorld(new MainWorld());
+            onRightEdgeCollision();
             
         }
     }
+    public void onRightEdgeCollision()
+    {
     
+    }
 }

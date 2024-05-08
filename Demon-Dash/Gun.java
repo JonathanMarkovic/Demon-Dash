@@ -11,7 +11,8 @@ public class Gun extends Actor
     public int gunOffset = 20;
     public Actor owner;
     public MouseInfo mouse = Greenfoot.getMouseInfo();
-    
+     int mouseX = 0;
+        int mouseY = 0;
     private boolean shooting = false;
     private int shootingDelay = 75; // Adjust the delay as needed
     private int shootingTimer = 0;
@@ -41,8 +42,6 @@ public class Gun extends Actor
     public int findAngle() //Angle of the cursor so player shoots towards cursor
     {
         MouseInfo mouse = Greenfoot.getMouseInfo();
-        int mouseX = 0;
-        int mouseY = 0;
         if (mouse != null) {
             mouseX = mouse.getX();
             mouseY = mouse.getY();

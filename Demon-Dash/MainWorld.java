@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class MainWorld extends SimulationWorld
 {
-    public int score = 0;
+    public static int score = 0;
     private PlayerShooter playerShooter;
     /**
      * Constructor for objects of class MainWorld.
@@ -23,10 +23,11 @@ public class MainWorld extends SimulationWorld
         prepare();
     }
     
-    public MainWorld(Player player) {
+    public MainWorld(PlayerShooter player) {
         super("", 800, 600, new Point2D(0.0, 0.0), 20);
         showText("Score: " + score, getWidth() / 2, 15);
         Greenfoot.playSound("demo Hellfire.wav");
+        playerShooter = player;
         prepare2();
     }
     
@@ -60,16 +61,35 @@ public class MainWorld extends SimulationWorld
     }
     
     private void prepare2() {
-        addObject(playerShooter, 17, 571);
+        if (playerShooter != null)
+        {
+            addObject(playerShooter, 17, 571);
+            if (playerShooter.gun != null)
+            {
+                addObject(playerShooter.gun,17,571);
+            }
+        }
+            
+        
         int platforms = Greenfoot.getRandomNumber(10);
         
         for (int i = 0; i < platforms; i++) {
-            addObject(new Platform(), Greenfoot.getRandomNumber(getWidth()), Greenfoot.getRandomNumber(getHeight()));
+            int x = Greenfoot.getRandomNumber(getWidth()) + 100;
+            int y = Greenfoot.getRandomNumber(getHeight());
+            addObject(new Platform(), x, y);
+            
+            if (Greenfoot.getRandomNumber(10) < 3) {
+            addObject(new Enemy(), x, y - 20);
+            }
         }
         
         if (Greenfoot.getRandomNumber(10) < 3) {
             addObject(new Enemy(), Greenfoot.getRandomNumber(getWidth()) + 100, Greenfoot.getRandomNumber(getHeight()));
         }
+    }
+    
+    public static void calcScore(int amountAdded) {
+        score += amountAdded;
     }
 }
 

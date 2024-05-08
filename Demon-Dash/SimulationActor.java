@@ -60,7 +60,6 @@ public class SimulationActor extends Actor
         // Set new actor position
         Point2D windowLocation = worldToWindow(position);
         setLocation((int) Math.round(windowLocation.getX()), (int) Math.round(windowLocation.getY()));
-
     }
 
     public void saveOriginalImage()

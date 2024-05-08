@@ -117,7 +117,15 @@ public class PlayerShooter extends Player
             setLocation(getX(), getWorld().getHeight() - getImage().getHeight() / 2);
             verticalVelocity = 0;
         }
-    }  
+    }
+    
+    public void onRightEdgeCollision() 
+    {
+        setLocation(getWorld().getWidth() - getImage().getWidth() / 2, getY());
+            this.velocity = new Vector2D(0.0, this.velocity.getY());
+            SimulationWorld world = (SimulationWorld) getWorld();
+            world.transitionToWorld(new MainWorld(this));
+    }
     
     /*
     private void checkForShooting() 
