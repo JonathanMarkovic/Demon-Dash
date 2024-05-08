@@ -38,6 +38,7 @@ public class MainWorld extends SimulationWorld
     private void prepare()
     {
         playerShooter = new PlayerShooter();
+        score = 0;
         addObject(playerShooter,17,571);
         Platform platform = new Platform();
         addObject(platform,228,505);
