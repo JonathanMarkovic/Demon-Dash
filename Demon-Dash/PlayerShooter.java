@@ -9,6 +9,8 @@ public class PlayerShooter extends Player
     private int shootingDelay = 75; // Adjust the delay as needed
     private int shootingTimer = 0;
     private int health = 3;
+    private boolean canTakeDamage = true;
+    private double timer = 0.0;
     
     public Gun gun;
 
@@ -22,6 +24,12 @@ public class PlayerShooter extends Player
     public void act()
     { 
         super.act();
+        timer += 0.02;
+        if (timer > 1) {
+            if (timer - 1 < 0.00005) {
+                timer = 0;
+            }
+        }
         takeDamage();
         if (this.isTouching(Gun.class)) {
             removeTouching(Gun.class);
@@ -50,9 +58,13 @@ public class PlayerShooter extends Player
     }
     
     public void takeDamage() {
-        if (this.isTouching(Enemy.class)) {
-            health--;
+        if (timer == 0) {
+                canTakeDamage = true;
+            }
             
+        if (this.isTouching(Enemy.class) && canTakeDamage) {
+            health--;
+            canTakeDamage = false;
             if (health == 0) {
                 World world = new GameOverWorld();
                 Greenfoot.setWorld(world);
