@@ -8,12 +8,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Enemy extends Player
 {
-    private int health = 3;
-    private int score = 10;
-    private int enemySpeed = 2;
+    protected int health = 3;
+    protected int score = 10;
+    protected int speed = 2;
     
     public Enemy() {
-        super(); 
+        super();
         this.acceleration = new Vector2D(0.0,-10.0);
     }
     
@@ -59,12 +59,12 @@ public class Enemy extends Player
         
         if (movement < 0) 
        { 
-            this.velocity = new Vector2D(enemySpeed, this.velocity.getY());   
+            this.velocity = new Vector2D(speed, this.velocity.getY());   
        }
        
        else if (movement > 0) 
        { 
-            this.velocity = new Vector2D(-enemySpeed, this.velocity.getY());      
+            this.velocity = new Vector2D(-speed, this.velocity.getY());      
        }
        else if (movement == 0)
        {

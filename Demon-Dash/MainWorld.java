@@ -61,6 +61,8 @@ public class MainWorld extends SimulationWorld
         addObject(ammoBox,228,476);
         AmmoCounter ammoCounter = new AmmoCounter();
         addObject(ammoCounter,23,21);
+        Slime slime = new Slime();
+        addObject(slime,745,579);
     }
     
     private void prepare2() {
@@ -81,8 +83,14 @@ public class MainWorld extends SimulationWorld
             int y = Greenfoot.getRandomNumber(getHeight());
             addObject(new Platform(), x, y);
             
-            if (Greenfoot.getRandomNumber(10) < 3) {
-            addObject(new Enemy(), x, y - 20);
+            if (Greenfoot.getRandomNumber(10) < 5) {
+                if (Greenfoot.getRandomNumber(100) < 50) {
+                    addObject(new Enemy(), x, y - 20);
+                } else {
+                    addObject(new Slime(), x, y - 20);
+                    addObject(new Slime(), x + 15, y - 30);
+                    addObject(new Slime(), x + 20, y - 30);
+                }
             }
         }
         
