@@ -62,8 +62,6 @@ public class Player extends SimulationActor
             jumpPressed = false;
             this.velocity = new Vector2D(this.velocity.getX(), this.velocity.getY() );      
        }
-
-
     }
     
     private void checkPlatformCollision() {

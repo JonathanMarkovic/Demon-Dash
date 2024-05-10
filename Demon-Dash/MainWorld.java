@@ -63,6 +63,8 @@ public class MainWorld extends SimulationWorld
         addObject(ammoCounter,23,21);
         Slime slime = new Slime();
         addObject(slime,745,579);
+        FlyingImp flyingImp = new FlyingImp();
+        addObject(flyingImp,473,162);
     }
     
     private void prepare2() {
