@@ -11,6 +11,7 @@ public class PlayerShooter extends Player
     private int health = 3;
     private boolean canTakeDamage = true;
     private double timer = 0.0;
+    private int deathWallTimer = 0;
     
     public Gun gun;
 
@@ -30,6 +31,8 @@ public class PlayerShooter extends Player
                 timer = 0;
             }
         }
+        
+        spawnDeathWall();
         takeDamage();
         if (this.isTouching(Gun.class)) {
             removeTouching(Gun.class);
@@ -57,15 +60,32 @@ public class PlayerShooter extends Player
         }
     }
     
+    public void spawnDeathWall() {
+        deathWallTimer++;
+        DeathWall deathWall = new DeathWall();
+        World world = getWorld();
+        
+        if (deathWallTimer == 55 * 5 && !containsDeathWall()) { 
+            //55 frames per second, death wall will sapwn after around 5 seconds
+            world.addObject(deathWall, deathWall.getImage().getWidth() / 2, world.getHeight() / 2);
+            deathWallTimer = 0;
+        }
+    }
+    
+    public boolean containsDeathWall() {
+        World world = getWorld();
+        return (world.getObjects(DeathWall.class).size() > 0);
+    }
+    
     public void takeDamage() {
         if (timer == 0) {
                 canTakeDamage = true;
             }
             
-        if (this.isTouching(Enemy.class) && canTakeDamage) {
+        if ((this.isTouching(Enemy.class) || isTouching(DeathWall.class)) && canTakeDamage) {
             health--;
             canTakeDamage = false;
-            if (health == 0) {
+            if (health == 0 || isTouching(DeathWall.class)) {
                 World world = new GameOverWorld();
                 Greenfoot.setWorld(world);
             }
@@ -138,6 +158,7 @@ public class PlayerShooter extends Player
             this.velocity = new Vector2D(0.0, this.velocity.getY());
             SimulationWorld world = (SimulationWorld) getWorld();
             world.transitionToWorld(new MainWorld(this));
+            deathWallTimer = 0;
     }
    
     

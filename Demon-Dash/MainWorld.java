@@ -10,6 +10,7 @@ public class MainWorld extends SimulationWorld
 {
     public static int score = 0;
     private PlayerShooter playerShooter;
+    private int timer = 0;
     /**
      * Constructor for objects of class MainWorld.
      * 
@@ -30,6 +31,15 @@ public class MainWorld extends SimulationWorld
         playerShooter = player;
         prepare2();
     }
+    /*
+    public void act() {
+        timer++;
+        if (timer == 55 * 5) { //about 55 frames per second on Greenfoot
+            timer = 0;         // after 5 seconds reset timer and spawn the death wall 
+            DeathWall deathWall = new DeathWall();
+            addObject(deathWall, deathWall.getImage().getWidth() / 2, getHeight() / 2);
+        }
+    }*/
     
     /**
      * Prepare the world for the start of the program.
@@ -81,7 +91,7 @@ public class MainWorld extends SimulationWorld
         int platforms = Greenfoot.getRandomNumber(10);
         
         for (int i = 0; i < platforms; i++) {
-            int x = Greenfoot.getRandomNumber(getWidth()) + 100;
+            int x = Greenfoot.getRandomNumber(getWidth()) + 150;
             int y = Greenfoot.getRandomNumber(getHeight());
             addObject(new Platform(), x, y);
             
