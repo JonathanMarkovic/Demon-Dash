@@ -31,16 +31,7 @@ public class MainWorld extends SimulationWorld
         playerShooter = player;
         prepare2();
     }
-    /*
-    public void act() {
-        timer++;
-        if (timer == 55 * 5) { //about 55 frames per second on Greenfoot
-            timer = 0;         // after 5 seconds reset timer and spawn the death wall 
-            DeathWall deathWall = new DeathWall();
-            addObject(deathWall, deathWall.getImage().getWidth() / 2, getHeight() / 2);
-        }
-    }*/
-    
+
     /**
      * Prepare the world for the start of the program.
      * That is: create the initial objects and add them to the world.
@@ -94,14 +85,17 @@ public class MainWorld extends SimulationWorld
             int x = Greenfoot.getRandomNumber(getWidth()) + 150;
             int y = Greenfoot.getRandomNumber(getHeight());
             addObject(new Platform(), x, y);
-            
-            if (Greenfoot.getRandomNumber(10) < 5) {
-                if (Greenfoot.getRandomNumber(100) < 50) {
-                    addObject(new Enemy(), x, y - 20);
-                } else {
+            int randomEnemySpawn = Greenfoot.getRandomNumber(100);
+            int ifEnemySpawn = Greenfoot.getRandomNumber(10);
+            if (ifEnemySpawn < 5) {
+                if (randomEnemySpawn < 10) {
+                    addObject(new FlyingImp(), x, 50);
+                } else if (randomEnemySpawn < 50){
                     addObject(new Slime(), x, y - 20);
                     addObject(new Slime(), x + 15, y - 30);
                     addObject(new Slime(), x + 20, y - 30);
+                } else if (randomEnemySpawn < 70) {
+                    addObject(new Enemy(), x, y - 20);
                 }
             }
         }
