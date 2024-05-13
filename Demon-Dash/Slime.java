@@ -8,8 +8,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Slime extends Enemy
 {   
+    GifImage slime;
+    GreenfootImage myImage;
+    
     public Slime() {
         super();
+        slime = new GifImage("Slime.gif");
         this.health = 1;
         this.score = 5;
         this.speed = 1;
@@ -22,5 +26,7 @@ public class Slime extends Enemy
     public void act()
     {
         super.act();
+        myImage = slime.getCurrentImage();
+        setImage(myImage);
     }
 }

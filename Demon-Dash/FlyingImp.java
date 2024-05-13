@@ -8,9 +8,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class FlyingImp extends Enemy
 {
+    GifImage skull;
+    GreenfootImage myImage;
+    
     public FlyingImp() {
         super();
-        this.health = 2;
+        skull = new GifImage("Skull Sprite.gif");
+        this.health = 1;
         this.score = 15;
         this.speed = 3;
         this.acceleration = new Vector2D(0.0,0.0);
@@ -25,6 +29,9 @@ public class FlyingImp extends Enemy
         takeDamage();
         if (health != 0) {
             move();    
+            myImage = skull.getCurrentImage();
+            myImage = myImage;
+            setImage(myImage);
         }
     }
     

@@ -10,11 +10,14 @@ public class Enemy extends Player
 {
     protected int health = 3;
     protected int score = 10;
-    protected int speed = 2;
+    protected int speed = 3;
+    GifImage enemy;
+    GreenfootImage myImage;
     
     public Enemy() {
         super();
         this.acceleration = new Vector2D(0.0,-10.0);
+        enemy = new GifImage("hell-hound-run.gif");
     }
     
     /**
@@ -29,6 +32,8 @@ public class Enemy extends Player
         takeDamage(); 
         if (health != 0) {
             move();
+            myImage = enemy.getCurrentImage();
+            setImage(myImage);
         }
     }
     

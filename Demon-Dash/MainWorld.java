@@ -90,6 +90,9 @@ public class MainWorld extends SimulationWorld
             if (ifEnemySpawn < 5) {
                 if (randomEnemySpawn < 10) {
                     addObject(new FlyingImp(), x, 50);
+                    addObject(new FlyingImp(), x + 5, 50);
+                    addObject(new FlyingImp(), x + 5, 45);
+                    addObject(new FlyingImp(), x + 10, 45);
                 } else if (randomEnemySpawn < 50){
                     addObject(new Slime(), x, y - 20);
                     addObject(new Slime(), x + 15, y - 30);
