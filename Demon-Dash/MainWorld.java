@@ -19,19 +19,20 @@ public class MainWorld extends SimulationWorld
         {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super("", 800, 600, new Point2D(0.0, 0.0), 20);
+        showTextWithFont("RUN", getWidth() / 2 - 100, getHeight() / 2 - 50);
         Greenfoot.playSound("demo Hellfire.wav");
-        showText("Score: " + score, getWidth() / 2, 15);
+        music = new GreenfootSound("demo Hellfire.wav");
         prepare();
     }
     
     public MainWorld(PlayerShooter player) {
         super("", 800, 600, new Point2D(0.0, 0.0), 20);
         showText("Score: " + score, getWidth() / 2, 15);
-        Greenfoot.playSound("demo Hellfire.wav");
+        music = new GreenfootSound("demo Hellfire.wav");
         playerShooter = player;
         prepare2();
     }
-
+    
     /**
      * Prepare the world for the start of the program.
      * That is: create the initial objects and add them to the world.
@@ -66,9 +67,32 @@ public class MainWorld extends SimulationWorld
         addObject(slime,745,579);
         FlyingImp flyingImp = new FlyingImp();
         addObject(flyingImp,473,162);
+        Health health = new Health();
+        addObject(health,758,29);
+        health.setLocation(737,27);
     }
     
     private void prepare2() {
+        Health health = new Health();
+        addObject(health,758,29);
+        health.setLocation(737,27);
+        
+        if (Greenfoot.getRandomNumber(10) >= 5) {
+            Medkit medkit = new Medkit();
+            int x = Greenfoot.getRandomNumber(800);
+            int y = Greenfoot.getRandomNumber(100) + 500;
+            addObject(medkit, x, y);
+            addObject(new Platform(), x + Greenfoot.getRandomNumber(100), y + Greenfoot.getRandomNumber(50));
+        }
+        
+        if (Greenfoot.getRandomNumber(10) >= 4) {
+            AmmoBox ammoBox = new AmmoBox();
+            int x = Greenfoot.getRandomNumber(800);
+            int y = Greenfoot.getRandomNumber(100) + 500;
+            addObject(ammoBox, x, y);
+            addObject(new Platform(), x + Greenfoot.getRandomNumber(100), y + Greenfoot.getRandomNumber(50));
+        }
+        
         if (playerShooter != null)
         {
             addObject(playerShooter, 17, 571);
@@ -87,12 +111,9 @@ public class MainWorld extends SimulationWorld
             addObject(new Platform(), x, y);
             int randomEnemySpawn = Greenfoot.getRandomNumber(100);
             int ifEnemySpawn = Greenfoot.getRandomNumber(10);
-            if (ifEnemySpawn < 5) {
+            if (ifEnemySpawn <= 4) {
                 if (randomEnemySpawn < 10) {
                     addObject(new FlyingImp(), x, 50);
-                    addObject(new FlyingImp(), x + 5, 50);
-                    addObject(new FlyingImp(), x + 5, 45);
-                    addObject(new FlyingImp(), x + 10, 45);
                 } else if (randomEnemySpawn < 50){
                     addObject(new Slime(), x, y - 20);
                     addObject(new Slime(), x + 15, y - 30);
@@ -110,6 +131,14 @@ public class MainWorld extends SimulationWorld
     
     public static void calcScore(int amountAdded) {
         score += amountAdded;
+    }
+    
+    public void showTextWithFont(String str, int x, int y) {
+        GreenfootImage img = getBackground();
+        Font font = new Font("Britannic Bold", false, false, 100);
+        img.setFont(font);
+        img.setColor(Color.RED); // ORANGE RED YELLOW
+        img.drawString(str, x, y);
     }
 }
 

@@ -34,14 +34,12 @@ public class PlayerShooter extends Player
         
         spawnDeathWall();
         takeDamage();
+        pickupMedkit();
         if (this.isTouching(Gun.class)) {
             removeTouching(Gun.class);
             equipGun();
         }
-        if (this.isTouching(Medkit.class)&&(health != 3)){
-            removeTouching(Medkit.class);
-            //pickupMedkit();
-        }
+       
         if (this.isTouching(AmmoBox.class)) {
             removeTouching(AmmoBox.class);
             //pickupAmmoBox();
@@ -65,7 +63,7 @@ public class PlayerShooter extends Player
         DeathWall deathWall = new DeathWall();
         World world = getWorld();
         
-        if (deathWallTimer == 55 * 5 && !containsDeathWall()) { 
+        if (deathWallTimer == 55 * 8 && !containsDeathWall()) { 
             //55 frames per second, death wall will sapwn after around 5 seconds
             world.addObject(deathWall, deathWall.getImage().getWidth() / 2, world.getHeight() / 2);
             deathWallTimer = 0;
@@ -92,9 +90,13 @@ public class PlayerShooter extends Player
         }
     }
     
-    /*public void pickupMedkit() {
-        if (
-    }*/
+    public void pickupMedkit() {
+        if (isTouching(Medkit.class) && health < 3) {
+            health++;
+            removeTouching(Medkit.class);
+        }
+    }
+    
     private void Movement() 
     {
         if(Greenfoot.isKeyDown("right") || Greenfoot.isKeyDown("d")) 
@@ -159,9 +161,12 @@ public class PlayerShooter extends Player
             SimulationWorld world = (SimulationWorld) getWorld();
             world.transitionToWorld(new MainWorld(this));
             deathWallTimer = 0;
+            MainWorld.calcScore(30);
     }
    
-    
-    
+    public int getHealth() {
+        return this.health;
+    }
  }
+ 
 

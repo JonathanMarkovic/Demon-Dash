@@ -10,6 +10,8 @@ public class Slime extends Enemy
 {   
     GifImage slime;
     GreenfootImage myImage;
+    GreenfootSound sound = new GreenfootSound("slime fx.wav");
+
     
     public Slime() {
         super();
@@ -28,5 +30,10 @@ public class Slime extends Enemy
         super.act();
         myImage = slime.getCurrentImage();
         setImage(myImage);
+        
+        sound.play();
+        if (this.health == 0) {
+            sound.stop();
+        }
     }
 }

@@ -8,15 +8,16 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class FlyingImp extends Enemy
 {
-    GifImage skull;
-    GreenfootImage myImage;
+    private GifImage skull;
+    private GreenfootImage myImage;
+    private GreenfootSound sound = new GreenfootSound("imp fx.wav");
     
     public FlyingImp() {
         super();
-        skull = new GifImage("Skull Sprite.gif");
+        skull = new GifImage("skull.gif");
         this.health = 1;
         this.score = 15;
-        this.speed = 3;
+        this.speed = 1;
         this.acceleration = new Vector2D(0.0,0.0);
     }
 
@@ -37,7 +38,14 @@ public class FlyingImp extends Enemy
     
     public void move() {
         PlayerShooter player = getWorld().getObjects(PlayerShooter.class).get(0);
-        turnTowards(player.getX(), player.getY());
-        move(3);
+        int x = player.getX();
+        int y = player.getY();
+        int xMove = (getX() <= x) ? 1 : -1;
+        int yMove = (getY() <= y) ? 1 : -1;
+        setLocation(getX() + xMove * speed, getY() + yMove * speed);
+        sound.play();
+        if (this.health == 0) {
+            sound.stop();
+        }
     }
 }

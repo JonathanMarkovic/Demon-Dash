@@ -13,4 +13,6 @@ comment4.params=
 comment4.target=void\ prepare2()
 comment5.params=amountAdded
 comment5.target=void\ calcScore(int)
-numComments=6
+comment6.params=str\ x\ y
+comment6.target=void\ showTextWithFont(java.lang.String,\ int,\ int)
+numComments=7

@@ -36,7 +36,7 @@ public class Bullet extends Gun
             setRotation(rotation); //To rotate bullet towards cursor
         }
         created = true; //So it doesn't stop at the cursor's location
-        move(25);
+        move(20);
     }
     
     /*

@@ -14,7 +14,7 @@ public class DeathWall extends Actor
      */
     public void act()
     {
-        move(2);
+        move(1);
         addDeathWall();
     }
     

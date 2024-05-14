@@ -13,6 +13,8 @@ public class Enemy extends Player
     protected int speed = 3;
     GifImage enemy;
     GreenfootImage myImage;
+    GreenfootSound sound;
+
     
     public Enemy() {
         super();
