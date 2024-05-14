@@ -24,7 +24,7 @@ public class GameOverWorld extends SimulationWorld
         GreenfootImage img = getBackground();
         Font font = new Font("Britannic Bold", false, false, 100);
         img.setFont(font);
-        img.setColor(Color.BLACK); // ORANGE RED YELLOW
+        img.setColor(Color.RED); // ORANGE RED YELLOW
         img.drawString(str, x, y);
     }
 }
