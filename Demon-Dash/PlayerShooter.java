@@ -35,6 +35,7 @@ public class PlayerShooter extends Player
         spawnDeathWall();
         takeDamage();
         pickupMedkit();
+        dashing();
         if (this.isTouching(Gun.class)) {
             removeTouching(Gun.class);
             equipGun();
@@ -96,61 +97,20 @@ public class PlayerShooter extends Player
             removeTouching(Medkit.class);
         }
     }
-    
-    private void Movement() 
-    {
-        if(Greenfoot.isKeyDown("right") || Greenfoot.isKeyDown("d")) 
-        {
-            move(3);
-        }
-        if(Greenfoot.isKeyDown("left") || Greenfoot.isKeyDown("a")) 
-        {
-            move(-3);
-        }
-    }
-    private void Dashing() {
-        if(Greenfoot.isKeyDown("Shift"))
-        {
-            //canTakeDamage = false;
-            
-        }
-    }
-    private void applyGravity() 
-    {
-        setLocation(getX(), getY() + verticalVelocity);
-        verticalVelocity += gravity;
-    }
-    
-    private void Jumping() 
-    {
-        if(Greenfoot.isKeyDown("space") || Greenfoot.isKeyDown("up") || Greenfoot.isKeyDown("w")) 
-        {
-            //System.out.println("Jumping key pressed"); //debugging
-            jump();
-        }
-    }
-    
-    private boolean onGround() 
-    {
-        int groundHeight = getWorld().getHeight() - getImage().getHeight() / 2;
-        return getY() >= groundHeight;
-    }
-    
-    private void jump() 
-    {
-        if(onGround()) 
-        {
-            //System.out.println("Jumping"); //debugging
-            verticalVelocity = -jumpStrength;
-        }
-    }
-    
-    private void checkForGround() 
-    {
-        if(getY() >= getWorld().getHeight() - getImage().getHeight() / 2) 
-        {
-            setLocation(getX(), getWorld().getHeight() - getImage().getHeight() / 2);
-            verticalVelocity = 0;
+   
+    private void dashing() {
+        if (Greenfoot.isKeyDown("Shift")) {
+            if(Greenfoot.isKeyDown("D") || Greenfoot.isKeyDown("Right"))
+            {
+                canTakeDamage = false;
+                move(15);
+                canTakeDamage = true;
+            } else if(Greenfoot.isKeyDown("A") || Greenfoot.isKeyDown("Left"))
+            {
+                canTakeDamage = false;
+                move(-15);
+                canTakeDamage = true;
+            }
         }
     }
     

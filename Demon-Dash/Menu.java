@@ -9,6 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Menu extends SimulationWorld
 {
     private int timer = 0;
+    private static int highScore = 0;
 
     /**
      * Constructor for objects of class Menu.
@@ -22,8 +23,13 @@ public class Menu extends SimulationWorld
     public void act() {
         timer++;
         int framesPerSecond = 55;
+        setHighScore();
         if (timer == framesPerSecond * 4) {
             transitionToWorld(new MainWorld());
         }
+    }
+    
+    public void setHighScore() {
+        Math.max(highScore, MainWorld.score);
     }
 }
